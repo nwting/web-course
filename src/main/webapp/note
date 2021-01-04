@@ -1,0 +1,77 @@
+空格 后代选择器，元素内【所有】符合第二级选择器的元素
+> 子选择器，仅元素内所有符合第二级选择器的【直接】子元素
+光标显示手 cursor: pointer;
+jQuery.trim()函数的返回值为String类型，返回去除两端空白字符串后的字符串。
+---五个常见表单事件：---
+1. focus（）
+当元素处于焦点时触发。
+2. blur（）
+当某个元素失去焦点时触发。
+3. change（）
+更改元素值（例如，更新复选框，单选按钮或文本框值）时触发。
+4. select（）
+突出显示元素内的文本时触发，仅限于文本框或文本区域。
+5. Submit（）
+尝试提交表单时触发，仅绑定到表单元素。
+---input的value含义---
+注释：<input type="checkbox"> 和 <input type="radio"> 中必须设置 value 属性。
+注释：value 属性无法与 <input type="file"> 一同使用。
+input标签有很多类型，也就是type，以下是一些常用type的说明
+text：文本框，input默认的type，不写就是这个，value表示文本框里的值。
+password：密码框，value表示密码框里的值。
+submit：提交按钮，value表示按钮上的文字
+button：普通按钮，value表示按钮上的文字
+reset：重置按钮，value表示按钮上的文字
+radio：单选框，value表示该单选框的真实值（一般真实值和数据库对应，显示的值给用户参考的）
+checkbox：复选框，value表示该复选框的真实值
+hidden：隐藏表单域，value表示该表单域的值。
+----doget()&dopost()----
+doget()：
+get方法啊会把名值对追加在请求的url后面，因为url对字符数目有限制，
+进而限制了用在客户端请求的参数值得数目，并且请求中的参数值是可见的，因此敏感信息不能用这种方式传递
+dopost()：
+post方法通过把请求参数值放在请求体中来克服get方法的限制，
+因此，可以发送的参数的数目是没有限制的，最后，通过post请求传递的敏感信息对外部客户端是不可见的
+1. get是从服务器上获取数据，post是向服务器传送数据。
+2. get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。
+3. 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。
+4. get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。
+5. get安全性非常低，post安全性较高。但是执行效率却比Post方法好。
+建议：
+1、get方式的安全性较Post方式要差些，包含机密信息的话，建议用Post数据提交方式；
+2、在做数据查询时，建议用Get方式；而在做数据添加、修改或删除时，建议用Post方式；
+java中的语句integer.parseint（)是将整型数据Integer转换为基本数据类型int
+---get&post---
+get/post: get提交时参数直接暴露在URL上。（不安全，有数据量限制）.与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用.
+然而，在以下情况中，请使用 POST 请求：
+ 无法使用缓存文件（更新服务器上的文件或数据库）
+ 向服务器发送大量数据（POST 没有数据量限制）
+ 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+Get/Post区别：
+1.Get：是来向服务器上获取数据，而Post是用来向服务器上传修改数据
+2.Get将表单里的数据添加到action所指向的URL后面，并且两者之间使用“?”连接，而各个变量之间使用“&”连接；
+post是将变量里中的数据放在form的数据体中，按照变量和值对象的方式，传递到所指向的action。
+3.Get是不安全的，因为在传输过程中，数据被放在请求的url中，这样，用户可以直接在浏览器上看到提交的数据，一些系统内部信息也一同显示在用户面前，Post的所有操作对用户来说都是不可见的。
+4.Get传输的数量小，主要是受限与于Url长度限制，其中IE浏览器对URL事物最大限度2083字符
+5.Form提交默认为get方法提交
+6.Get方式获取数据后，刷新不会有负面的影响，因为他只是获取数据，而Post方法刷洗页面重复提交可能会产生不良的后果。
+7.获取表单元素的三种方式（提交方式为post）：
+ a.FormCollection form（第一种）
+  public ActionResult formAction(FormCollection form) {
+  string name = form["textName"];
+  string sex = form["cboSex"];
+  string address = form["textAddress"];
+  string bl= form["text"];
+  return Content(name+"&"+sex+"&"+address);//Content(string)返回字符串 FormCollection用来在controller中获取页面表单元素的数据。 它是表单元素的集合，包括元素
+ b.Request.From[“textName”];textName为不表单元素中name属性的值（第二种）
+ public ActionResult formAction1() {
+  string name = Request.Form["textName"];
+  string sex = Request.Form["cboSex"];
+  string address = Request.Form["textAddress"];
+  return Content(name + "&" + sex + "&" + address);//Content(string)返回字符串 }
+ C.第三种（提交方式为get）
+ public ActionResult getAction(string textName,string cboSex,string txtAddress) {
+  string name = textName;
+  string sex = cboSex;
+  string address = textAddress;
+  return Content(name + "&" + sex + "&" + address);//Content(string)返回字符串s }

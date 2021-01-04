@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>注册</h1>
+<label>
+    <input type="checkbox" id="legal">我已阅读相关说明并遵守相关法律
+</label>
+
+<form id="register">
+    <div>
+        用户名：<input type="text" name="username">
+        <br>
+        未来意向：
+        <label><input type="radio" name="purp" value="1">Java工程师</label>
+        <label><input type="radio" name="purp" value="2">测试工程师</label>
+        <label><input type="radio" name="purp" value="3">前端工程师</label>
+        <input type="hidden" name="purptemp">
+        <br><br>
+        请从以下课程中选择2项最喜欢的课程
+        <ul>
+            <li><label><input type="checkbox" name="courses" value="11">Web开发技术</label></li>
+            <li><label><input type="checkbox" name="courses" value="22">软件项目管理</label></li>
+            <li><label><input type="checkbox" name="courses" value="33">数据库原理</label></li>
+            <li><label><input type="checkbox" name="courses" value="44">系统分析与设计</label></li>
+        </ul>
+        <br>
+        地址：<br>
+        <br>
+        <ul id="address">
+        </ul>
+        <input type="text" name="addAddress">
+        <button type="button" id="addbtn">添加地址</button>
+        <br>
+        <button type="submit">提交</button>
+    </div>
+</form>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        let registerForm=$("#register :input").prop("disabled",true);
+        let usernameValid=false;
+        let propValid=false;
+        //1
+        $("#legal").click(function () {
+            let legalstatues=!$(this).prop("checked");
+            //console.log(legalstatues);
+            registerForm.not($("button:submit")).prop("disabled",legalstatues);
+            //console.log($("button:submit").prop("disabled"));
+        })
+        //2
+        $("input[name=username]").change(function () {
+            let inputlength=$(this).val().trim().length;
+            //console.log(inputlength);
+            if(inputlength<6){
+                alert("用户名必须大于等于6位");
+                usernameValid=false;
+            }
+            else{
+                usernameValid=true;
+            }
+        })
+        //3
+        $("input[name=purp]").click(function () {
+            if($("input[name=purptemp]").val()==$(this).val()){
+                $(this).prop("checked",false);
+            }
+            else{
+                $("input[name=purptemp]").prop("value",$(this).val());
+            }
+        })
+        //4
+        const amount=2;
+        const courses=$("input[name=courses]");
+        courses.click(function () {
+            let checked=courses.filter(":checked");
+            let unchecked=courses.not(":checked");
+            //console.log("$(this)="+$(this).length);
+            //console.log("courses="+courses.length);
+            if(checked.length>=amount){
+                unchecked.prop("disabled",true);
+                propValid=true;
+            }
+            else{
+                unchecked.prop("disabled",false);
+                propValid=false;
+            }
+        })
+        //5
+        $("#addbtn").click(function () {
+            let addr=$("input[name=addAddress]").val();
+            console.log(addr);
+            $("input[name=addAddress]").val("");
+            let additem=$(`<li>${addr}</li>`);
+            //注意添加html代码的符号为``,不是单引号
+            additem.css("display","none");
+            $("#address").append(additem);
+            additem.fadeIn(1000);
+        })
+        //6
+        $("input[name=username],input[name=courses]").change(function () {
+            let valid=usernameValid&&propValid;
+            $("button:submit").prop("disabled",!valid);
+        })
+    })
+</script>
+</body>
+</html>

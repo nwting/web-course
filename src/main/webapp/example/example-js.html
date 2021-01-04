@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p id="a1">something</p>
+    <button type="button" onclick="myFunction1()">this is a button</button>
+    <input type="text" onkeyup="upperCase(this)">
+    <button type="button" onclick="changeInputType()">点击修改输入框为checkbox</button><br>
+    输入框<input type="text" name="texttocheckbox">
+    <p id="p12">原生js没有顺次实现改变</p>
+    <button type="button" onclick="p1()">JS click</button>
+    <button type="button" id="b1">JQuery callback</button>
+<script>
+    function myFunction1() {
+        document.getElementById("a1").innerHTML="changed by js";
+    }
+    function upperCase(input) {
+        input.value=input.value.toUpperCase();
+    }
+    let changeInputType=()=>{
+        let input=document.querySelector("Input[name=texttocheckbox]");
+        input.type=input.type==="text"?"checkbox":"text";
+    }
+    function p1(){
+        document.getElementById("p1").style.display="none";
+        window.alert("hidden");
+    }
+    $(function () {
+        $("#b1").click(()=>{
+            $("#p12").hide(()=>{
+                alert("hidden");
+            });
+        });
+    })
+</script>
+</body>
+</html>

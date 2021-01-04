@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        aside{
+            width: 300px;
+            background: #f1f1f1;
+        }
+        .sidebar>h2{
+            background: #3185bf;
+            color: white;
+            padding: 5px;
+        }
+        .sidebar ul{
+           display: none;
+        }
+        .sidebar h2:hover{
+            background-color: black;
+            cursor: pointer;
+        }
+        .sidebar a:hover{
+            background-color: #555555;
+            color: white;
+        }
+        li a{
+            display: block;
+            text-decoration: none;
+            color: black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<aside>
+    <div class="sidebar">
+        <h2>云技术管理</h2>
+        <ul>
+            <li><a href="#">云服务器</a></li>
+            <li><a href="#">云数据库</a></li>
+            <li><a href="#">负载均衡</a></li>
+        </ul>
+    </div>
+    <div class="sidebar">
+        <h2>安全管理</h2>
+        <ul>
+            <li><a href="#">云盾控制台</a></li>
+            <li><a href="#">DDoS高防IP</a></li>
+            <li><a href="#">Web应用防火墙</a></li>
+            <li><a href="#">CA证书服务</a></li>
+        </ul>
+    </div>
+</aside>
+<script>
+    $(function () {
+        $("h2").click(function () {
+            let ul=$(this).next("ul");
+            ul.slideToggle();
+            $(".sidebar>ul").not(ul).slideUp();
+        })
+    })
+</script>
+</body>
+</html>
